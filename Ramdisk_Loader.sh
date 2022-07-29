@@ -5,6 +5,16 @@
 echo "**** SSH Ramdisk_Loader 2.0 ****"
 echo made by @Ralph0045
 
+if [[ $OSTYPE == "linux"* ]]; then
+    . /etc/os-release 2>/dev/null
+    platform="linux"
+elif [[ $OSTYPE == "darwin"* ]]; then
+    platform="macos"
+elif [[ $OSTYPE == "msys" ]]; then
+    platform="win"
+fi
+irecovery="../bin/irecovery_$platform"
+
 if [ $# -lt 2 ]; then
 echo "Usage:
 
@@ -61,46 +71,22 @@ fi
 cd SSH-Ramdisk-$device
 
 if [ "$is_64" = "true" ]; then
-    echo Sending iBSS
-    sleep 2s
-    irecovery -f iBSS.img4
-    echo Sending iBEC
-    irecovery -f iBEC.img4
-    sleep 2s
-    irecovery -f iBEC.img4
-    irecovery -c go
-    echo Sending ramdisk
-    irecovery -f ramdisk.img4
-    irecovery -c ramdisk
-    echo Sending applelogo
-    irecovery -f applelogo.img4
-    irecovery -c "setpicture 5"
-    echo Sending devicetree
-    irecovery -f devicetree.img4
-    irecovery -c devicetree
-    
-    if [ -e "trustcache" ]; then
-    echo Sending trustcache
-    irecovery -f trustcache
-    irecovery -c firmware
-    fi
-    echo Sending Kernelcache
-    irecovery -f kernelcache.img4
-    irecovery -c bootx
+    echo "64-bit not supported"
+    exit 1
 else
     echo Sending iBSS
-    irecovery -f iBSS
+    $irecovery -f iBSS
     echo Sending iBEC
-    irecovery -f iBEC
+    $irecovery -f iBEC
     echo Sending ramdisk
-    irecovery -f ramdisk.dmg
-    irecovery -c ramdisk
+    $irecovery -f ramdisk.dmg
+    $irecovery -c ramdisk
     echo Sending devicetree
-    irecovery -f devicetree
-    irecovery -c devicetree
+    $irecovery -f devicetree
+    $irecovery -c devicetree
     echo Sending kernelcache
-    irecovery -f kernelcache
-    irecovery -c bootx
+    $irecovery -f kernelcache
+    $irecovery -c bootx
 fi
 echo Done
 cd ..

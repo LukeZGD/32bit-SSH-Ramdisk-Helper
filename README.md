@@ -1,31 +1,23 @@
-# SSH Ramdisk maker and loader for 32/64 bit devices
+# SSH Ramdisk maker and loader for 32-bit devices
 
 ## There's no warranty provided!
 
-## How to use it  </br>
-Getting the requirements: </br>
+- Fork for 32-bit device support only
+- Modified to work on macOS, Linux, and Windows MSYS2
+
+## How to use:
+Making the ramdisk:
 ```
-bash Requirements.sh
-```
-Making the ramdisk: </br>
-```
-bash Ramdisk_Maker.sh -d <device> -i <version>
-```
-Getting a dropbear_rsa_host_key (only needed on 64 bit devices) : </br>
-Booting it : </br>
-```
-bash get_dropbear_key.sh
+./Ramdisk_Maker.sh -d <device> -i <version>
 ```
 Put the device in pwned dfu (or kdfu) and:
 ```
-bash Ramdisk_Loader.sh -d <device>
+./Ramdisk_Loader.sh -d <device>
 ```
-Note: you need libirecovery
-
-# It should work with all limera1n/checkm8 devices
-Let me know on twitter (@Ralph0045) if it doesn't work on your device
+### It should work with all 32-bit limera1n/checkm8 devices
 
 # Credits/Thanks to
+- @Ralph0045 for SSH ramdisk maker and loader
 - @iH8sn0w for iBoot32Patcher </br>
 - msftguy for ssh-rd </br>
 - @daytonhasty for Odysseus and kairos </br>
