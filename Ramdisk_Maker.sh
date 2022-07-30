@@ -136,11 +136,11 @@ for i in {1..6}
     eval "$temp_type"_key="$((cat temp_keys.html) | grep "$temp_type-key" | awk -F"</code>" '{print $1}' | awk -F"$temp_type-key\"\>" '{print $2}')"
     iv=$temp_type"_iv"
     key=$temp_type"_key"
-    
+
     if [ "$temp_type2" = "RestoreRamDisk" ]; then
-        component="$((cat BuildManifest.plist) | grep $boardcfg -A 3000 | grep $temp_type2 -A 100| grep dmg -m 1 | sed s+'<string>'++ | sed s+'</string>'++ | xargs)"
+        component="$((cat BuildManifest.plist) | grep -i $boardcfg -A 3000 | grep $temp_type2 -A 100 | grep dmg -m 1 | sed s+'<string>'++ | sed s+'</string>'++ | xargs)"
     else
-        component="$((cat BuildManifest.plist) | grep $boardcfg -A 3000 | grep $temp_type2 | grep string -m 1 | sed s+'<string>'++ | sed s+'</string>'++ | xargs)"
+        component="$((cat BuildManifest.plist) | grep -i $boardcfg -A 3000 | grep $temp_type2 | grep string -m 1 | sed s+'<string>'++ | sed s+'</string>'++ | xargs)"
     fi
     
     echo Downloading $component...
