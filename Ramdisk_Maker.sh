@@ -166,16 +166,8 @@ echo Making ramdisk...
 
 if [ "$is_64" != "true" ]; then
     $xpwntool RestoreRamDisk.dec.img3 RestoreRamDisk.raw.dmg
-    if [[ $platform == "macos" ]]; then
-        hdiutil resize -size 30MB RestoreRamDisk.raw.dmg
-        mkdir ramdisk_mountpoint
-        hdiutil attach -mountpoint ramdisk_mountpoint/ RestoreRamDisk.raw.dmg
-        tar -xvf ../../resources/ssh.tar -C ramdisk_mountpoint/
-        hdiutil detach ramdisk_mountpoint
-    else
-        $hfsplus RestoreRamDisk.raw.dmg grow 31457280
-        $hfsplus RestoreRamDisk.raw.dmg untar ../../resources/ssh.tar
-    fi
+    $hfsplus RestoreRamDisk.raw.dmg grow 31457280
+    $hfsplus RestoreRamDisk.raw.dmg untar ../../resources/ssh.tar
     $xpwntool RestoreRamDisk.raw.dmg ramdisk.dmg -t RestoreRamDisk.dec.img3
     mv -v ramdisk.dmg ../
     $xpwntool iBSS.dec.img3 iBSS.raw
