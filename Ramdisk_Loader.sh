@@ -11,9 +11,19 @@ if [[ $OSTYPE == "linux"* ]]; then
 elif [[ $OSTYPE == "darwin"* ]]; then
     platform="macos"
 elif [[ $OSTYPE == "msys" ]]; then
-    platform="win"
+    platform="windows"
 fi
-irecovery="../bin/irecovery_$platform"
+dir="../bin/$platform"
+if [[ $platform == "linux" ]]; then
+    if [[ $(uname -a) == "a"* && $(getconf LONG_BIT) == 64 ]]; then
+        dir+="/arm64"
+    elif [[ $(uname -a) == "a"* ]]; then
+        dir+="/arm"
+    else
+        dir+="/x86_64"
+    fi
+fi
+irecovery="$dir/irecovery"
 
 if [ $# -lt 2 ]; then
 echo "Usage:
