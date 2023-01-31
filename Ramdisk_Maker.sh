@@ -13,7 +13,7 @@ elif [[ $OSTYPE == "darwin"* ]]; then
 elif [[ $OSTYPE == "msys" ]]; then
     platform="windows"
 fi
-dir="../bin/$platform"
+dir="../../bin/$platform"
 if [[ $platform == "linux" ]]; then
     if [[ $(uname -a) == "a"* && $(getconf LONG_BIT) == 64 ]]; then
         dir+="/arm64"
@@ -23,10 +23,10 @@ if [[ $platform == "linux" ]]; then
         dir+="/x86_64"
     fi
 fi
-partialzip="../../$dir/partialzip"
-xpwntool="../../$dir/xpwntool"
-hfsplus="../../$dir/hfsplus"
-iBoot32Patcher="../../$dir/iBoot32Patcher"
+partialzip="$dir/partialzip"
+xpwntool="$dir/xpwntool"
+hfsplus="$dir/hfsplus"
+iBoot32Patcher="$dir/iBoot32Patcher"
 
 if [ $# -lt 2 ]; then
 echo "Usage:
