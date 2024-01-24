@@ -1,9 +1,8 @@
 # SSH Ramdisk maker and loader for 32-bit devices
 
-## There's no warranty provided!
-
 - Fork for 32-bit device support only
 - Modified to work on macOS, Linux, and Windows MSYS2
+- 32bit-SSH-Ramdisk-Helper is now a part of [Legacy iOS Kit](https://github.com/LukeZGD/Legacy-iOS-Kit)
 
 ## How to use:
 Making the ramdisk:
